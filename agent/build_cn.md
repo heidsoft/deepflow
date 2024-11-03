@@ -5,6 +5,7 @@
 ## 使用 docker 编译
 
 最简单的方法是使用我们构建好的编译环境：
+
 ```bash
 git clone --recursive https://github.com/deepflowio/deepflow.git 
 cd deepflow 
@@ -18,21 +19,27 @@ docker run --privileged --rm -it -v \
 ## 手动编译
 
 agent 编译需要准备以下环境:
+
 - Clang/LLVM 11 或 Clang/LLVM 12
 - rust       1.61以上
 
 安装基本工具：
+
 - ubuntu、debian、kali 等使用 apt 安装:
+
   ```bash
   apt-get install -y clang-11 gcc llvm-11 llvm-11-dev libpcap0.8-dev libelf-dev make
   ```
+
 - fedora:
+
   ```bash
   yum install llvm11 gcc  libpcap-devel glibc-static elfutils-libelf-devel make
   yum --releasever=33 install clang   # install clang11
   ```
 
 添加软链接：
+
 ```bash
 ln -s /usr/bin/clang-11 /usr/bin/clang
 ln -s /usr/bin/llvm-objdump-11 /usr/bin/llvm-objdump
@@ -41,6 +48,7 @@ ln -s /usr/bin/llvm-strip-11 /usr/bin/llvm-strip
 ```
 
 编译依赖的静态库：
+
 ```bash
 # bcc
 # reference：https://github.com/iovisor/bcc/blob/master/INSTALL.md
@@ -83,11 +91,13 @@ ln -s /usr/local/lib/libelf.a /usr/lib/libelf.a
 # 安装/升级golang版本到go1.18
 wget https://github.com/deepflowio/libGoReSym/archive/refs/tags/v0.0.1-2.tar.gz
 tar -xzf v0.0.1-2.tar.gz
+
 cd libGoReSym-0.0.1-2
 make && make install && make clean
 ```
 
 编译 agent：
+
 ```bash
 git clone --recursive https://github.com/deepflowio/deepflow.git
 cd deepflow/agent
