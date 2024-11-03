@@ -31,7 +31,7 @@ tonic = "0.8.1"
 k8s-openapi.workspace = true
 kube = { workspace = true, features = ["client"] }
 neli = "0.6.4"
-nix = "0.23"
+nix = "0.29.0"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 pcap = "0.10.1"

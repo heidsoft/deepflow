@@ -273,8 +273,27 @@ pub fn is_unicast_link_local(ip: &Ipv6Addr) -> bool {
 }
 
 pub fn get_mac_by_ip(ip: IpAddr) -> Result<MacAddr> {
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     let links = link_list()?;
+
+    // 如果需要在 macOS 上提供替代实现，可以在这里添加
+    #[cfg(target_os = "macos")]
+    let links = {
+        // 替代实现或返回错误
+        return Err(Error::UnsupportedPlatform(
+            "macOS does not support link_list".to_string(),
+        ));
+    };
+
     let addrs = addr_list()?;
+    // 如果需要在 macOS 上提供替代实现，可以在这里添加
+    #[cfg(target_os = "macos")]
+    let addrs = {
+        // 替代实现或返回错误
+        return Err(Error::UnsupportedPlatform(
+            "macOS does not support addr_list".to_string(),
+        ));
+    };
     let if_idx = addrs
         .iter()
         .find_map(|a| {

@@ -75,6 +75,7 @@ mod platform_consts {
     pub const COREFILE_FORMAT: &'static str = "dump";
 }
 
+#[cfg(target_os = "windows")]
 pub use platform_consts::*;
 
 pub const FIELD_OFFSET_DA: usize = 0;
